@@ -26,3 +26,5 @@ writeFile('index.html', generatePage(name, github), err => {
   if (err) throw err;
   console.log(`Portfolio Complete! Check out index.html to see the output!`);
 });
+
+https://courses.bootcampspot.com/courses/2193/pages/9-dot-2-5-generate-the-html-file?module_item_id=567800
