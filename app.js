@@ -30,7 +30,15 @@ Add a New Project
     {
       type: 'input',
       name: 'description',
-      message: 'Provide a description of the project (Required)'
+      message: 'Provide a description of the project (Required)',
+      validate: projDesc => {
+        if (projDesc) {
+          return true;
+        } else {
+          console.log('Please enter a project description!');
+          return false;
+        }
+      }
     },
     {
       type: 'checkbox',
@@ -41,7 +49,15 @@ Add a New Project
     {
       type: 'input',
       name: 'link',
-      message: 'Enter the GitHub link to your project. (Required)'
+      message: 'Enter the GitHub link to your project. (Required)',
+      validate: projectLink => {
+        if (projectLink) {
+          return true;
+        } else {
+          console.log('Please enter a Github link!');
+          return false;
+        }
+      }
     },
     {
       type: 'confirm',
@@ -70,12 +86,28 @@ const promptUser = () => {
     {
       type: 'input',
       name: 'name',
-      message: 'What is your name?'
+      message: 'What is your name? (Required)',
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log('Please enter your name!');
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'github',
-      message: 'Enter your GitHub Username'
+      message: 'Enter your GitHub Username',
+      validate: github => {
+        if (github) {
+          return true;
+        } else {
+          console.log('Please enter your Github username!');
+          return false;
+        }
+      }
     },
     {
       type: 'input',
@@ -88,5 +120,3 @@ const promptUser = () => {
 promptUser()
   .then(promptProject)
   .then(portfolioData => console.log(portfolioData));
-
-  https://courses.bootcampspot.com/courses/2193/pages/9-dot-3-6-validate-answers?module_item_id=567829
