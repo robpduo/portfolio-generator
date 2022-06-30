@@ -1,14 +1,7 @@
 import inquirer from 'inquirer';
-// const fs = require('fs');
-// const generatePage = require('./src/page-template');
+import { writeFile } from 'fs';
+import generatePage from './src/page-template.js'
 
-// const pageHTML = generatePage(name, github);
-
-// fs.writeFile('./index.html', pageHTML, err => {
-//   if (err) throw err;
-
-//   console.log('Portfolio complete! Check out index.html to see the output!');
-// });
 const promptProject = portfolioData => {
   // If there's no 'projects' array property, create one
   if (!portfolioData.projects) {
@@ -119,7 +112,7 @@ const promptUser = () => {
       type: 'input',
       name: 'about',
       message: 'Provide some information about yourself:',
-      when: ({ confirmAbout }) => {
+      when: ({ confirmAbout }) => { //confirmAbout is a variable declared/initialiezed in the previous prompt
         if (confirmAbout) {
           return true;
         } else {
@@ -132,4 +125,11 @@ const promptUser = () => {
 
 promptUser()
   .then(promptProject)
-  .then(portfolioData => console.log(portfolioData));
+  .then(portfolioData => {
+    const pageHTML = generatePage(portfolioData);
+    writeFile('./dist/index.html', pageHTML, err => {
+      if (err) throw err;
+    });
+  });
+
+  https://courses.bootcampspot.com/courses/2193/pages/9-dot-5-3-finalize-output-with-a-style-sheet?module_item_id=567870
