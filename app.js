@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-import { writeFile } from 'fs';
+import {fileWrite, fileCopy} from './utils/generate-site.js'
 import generatePage from './src/page-template.js'
 
 const promptProject = portfolioData => {
@@ -122,14 +122,21 @@ const promptUser = () => {
     }
   ]);
 };
-
 promptUser()
   .then(promptProject)
   .then(portfolioData => {
-    const pageHTML = generatePage(portfolioData);
-    writeFile('./dist/index.html', pageHTML, err => {
-      if (err) throw err;
-    });
+    return generatePage(portfolioData);
+  })
+  .then(pageHTML => {
+    return fileWrite(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return fileCopy();
+  })
+  .then(copyFileResponse => {
+    console.log(copyFileResponse);
+  })
+  .catch(err => {
+    console.log(err);
   });
-
-  https://courses.bootcampspot.com/courses/2193/pages/9-dot-5-3-finalize-output-with-a-style-sheet?module_item_id=567870
